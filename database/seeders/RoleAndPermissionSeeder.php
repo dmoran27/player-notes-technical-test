@@ -16,19 +16,29 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'manage-notes']);
         Permission::firstOrCreate(['name' => 'view-notes']);
 
-        //Roles
+        //Rol
         $playerRole = Role::firstOrCreate(['name' => 'player']); //Without permissions, just for role assignment
         $agentRole = Role::firstOrCreate(['name' => 'support-agent']);
-
-        $agentRole->givePermissionTo(['manage-notes', 'view-notes']);       
+        $viewerRole = Role::firstOrCreate(['name' => 'viewer-support']);
         
-        //Two users for testing: one agent and two player
+
+        $agentRole->givePermissionTo(['manage-notes', 'view-notes']);  
+        $viewerRole->givePermissionTo('view-notes');     
+        
+        //Users for testing: two agent and two player
         $agent = User::firstOrCreate([
             'name' => 'Support Agent',
             'email' => 'support@test.com',
             'password' => Hash::make('password'),
         ]);
         $agent->assignRole($agentRole);
+
+        $viewer = User::firstOrCreate([
+            'name' => 'Support Viewer',
+            'email' => 'viewer@test.com',
+            'password' => Hash::make('password'),
+        ]);
+        $viewer->assignRole($viewerRole);
 
         $player = User::firstOrCreate([
             'name' => 'Player User',
