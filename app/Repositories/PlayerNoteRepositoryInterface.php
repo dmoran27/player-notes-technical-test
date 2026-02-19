@@ -10,4 +10,8 @@ interface PlayerNoteRepositoryInterface
     public function getNotesByPlayer(int $playerId): Collection;
     
     public function createNote(array $data): PlayerNote;
+
+    public function getAllNotes() : Collection;
+    
+    public function getAllPlayers() : Collection;
 }

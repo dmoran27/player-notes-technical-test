@@ -19,4 +19,15 @@ class EloquentPlayerNoteRepository implements PlayerNoteRepositoryInterface
     {
         return PlayerNote::create($data);
     }
+
+    public function getAllNotes() : Collection
+    {
+        return PlayerNote::with(['author', 'player'])->latest()->get();
+    }
+
+    public function getAllPlayers() : Collection {
+        return \App\Models\User::whereHas('roles', function($q) {
+            $q->where('name', 'player');
+        })->get();
+    }
 }
