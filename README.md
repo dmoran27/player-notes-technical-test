@@ -22,7 +22,7 @@ MySQL (Base de Datos)
 1. **Clonar el repositorio:**
 
 ```bash
-git clone <tu-url-del-repositorio>
+git clone https://github.com/dmoran27/player-notes-technical-test
 cd player-notes
 ```
 
