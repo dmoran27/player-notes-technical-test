@@ -26,32 +26,40 @@ class RoleAndPermissionSeeder extends Seeder
         $viewerRole->givePermissionTo('view-notes');     
         
         //Users for testing: two agent and two player
-        $agent = User::firstOrCreate([
-            'name' => 'Support Agent',
-            'email' => 'support@test.com',
-            'password' => Hash::make('password'),
-        ]);
+        $agent = User::firstOrCreate(
+            ['email' => 'support@test.com'], // Único criterio de búsqueda
+            [
+                'name' => 'Support Agent',
+                'password' => Hash::make('password'),
+            ]
+        );
         $agent->assignRole($agentRole);
 
-        $viewer = User::firstOrCreate([
-            'name' => 'Support Viewer',
-            'email' => 'viewer@test.com',
-            'password' => Hash::make('password'),
-        ]);
+        $viewer = User::firstOrCreate(
+            ['email' => 'viewer@test.com'],
+            [
+                'name' => 'Support Viewer',
+                'password' => Hash::make('password'),
+            ]
+        );
         $viewer->assignRole($viewerRole);
 
-        $player = User::firstOrCreate([
-            'name' => 'Player User',
-            'email' => 'player1@user.com',
-            'password' => Hash::make('password'),
-        ]);
+        $player = User::firstOrCreate(
+            ['email' => 'player1@user.com'],
+            [
+                'name' => 'Player User',
+                'password' => Hash::make('password'),
+            ]
+        );
         $player->assignRole($playerRole);
 
-        $player2 = User::create([
-            'name' => 'Player User 2',
-            'email' => 'player2@user.com',
-            'password' => Hash::make('password'),
-        ]);
+        $player2 = User::firstOrCreate(
+            ['email' => 'player2@user.com'],
+            [
+                'name' => 'Player User 2',
+                'password' => Hash::make('password'),
+            ]
+        );
         $player2->assignRole($playerRole);
 
     }

@@ -14,18 +14,26 @@ class PlayerNotes extends Component
         
     public string $content = '';
 
+    public bool $isRestricted = false;
+
+    public bool $saveNotes = false;
+
     public function mount()
     {
         // Si el usuario tiene el rol de jugador, lanzamos un error 403 (Prohibido)
         if (auth()->user()->hasRole('player')) {
-            abort(403, 'Access denied: support agents cannot view this page.');
+            $this->isRestricted = true;
+        }
+
+        if (Auth::user()->can('manage-notes')) {
+            $this->saveNotes = true;
         }
     }
 
     public function render(PlayerNoteRepositoryInterface $repository): View
     {
        return view('livewire.player-notes', [
-            'notes' => $this->playerId ? $repository->getAllNotes() : [],
+            'notes' => $repository->getAllNotes(),
             'players' => $repository->getAllPlayers()
         ]);
     }

@@ -15,3 +15,4 @@ Auth::routes([
 ]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/players/{player}/notes', PlayerNotes::class)->name('player.notes')->middleware('auth');

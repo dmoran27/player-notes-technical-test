@@ -1,4 +1,9 @@
 <div>
+    @if($isRestricted)
+        <div class="alert alert-warning">
+            You do not have permission to view or manage player notes.
+        </div>
+    @else
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-light">
             <h5 class="mb-0">New Note for Player</h5>
@@ -30,12 +35,13 @@
                         @error('content') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
                 </div>
-
-                <div class="mt-3 text-end">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save"></i> Save Note
-                    </button>
-                </div>
+                @if($saveNotes)
+                    <div class="mt-3 text-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Save Note
+                        </button>
+                    </div>
+                @endif
             </form>
         </div>
     </div>
@@ -71,4 +77,5 @@
             </table>
         </div>
     </div>
+    @endif
 </div>
