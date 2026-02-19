@@ -49,9 +49,8 @@ class PlayerNotes extends Component
  
     public function saveNote(PlayerNoteRepositoryInterface $repository): void
     {
-        if (!Auth::user()->can('manage-notes')) {
-            session()->flash('error', 'Can\'t save note: insufficient permissions.');
-            return;
+        if (!auth()->user()->can('manage-notes')) {
+            abort(403, 'Unauthorized');
         }
 
         $this->validate();

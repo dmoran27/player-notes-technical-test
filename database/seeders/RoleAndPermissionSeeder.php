@@ -45,7 +45,7 @@ class RoleAndPermissionSeeder extends Seeder
         $viewer->assignRole($viewerRole);
 
         $player = User::firstOrCreate(
-            ['email' => 'player1@user.com'],
+            ['email' => 'player1@test.com'],
             [
                 'name' => 'Player User',
                 'password' => Hash::make('password'),
@@ -54,7 +54,7 @@ class RoleAndPermissionSeeder extends Seeder
         $player->assignRole($playerRole);
 
         $player2 = User::firstOrCreate(
-            ['email' => 'player2@user.com'],
+            ['email' => 'player2@test.com'],
             [
                 'name' => 'Player User 2',
                 'password' => Hash::make('password'),
